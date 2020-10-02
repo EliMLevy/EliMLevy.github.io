@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Processing Simulations</title>
+        <style type="text/css">
+            h3 {
+               font-size: 3em;
+            }
+            body {
+                text-align: center;
+            }
+
+            #sim1 {
+                position: absolute;
+                top: 200px;
+                left: 100px;
+            }
+
+            #instruc1 {
+                position: absolute;
+                font-size: 20px;
+                width: 500px;
+                top: 200px;
+                left: 500px;
+            }
+
+            ul  {
+                text-align: left;
+                list-style: none;
+            }
+        </style>
+    </head>
+    <body>
+    	<h3 id = "proc-sims" >Processing Simulations</h3>
+        <p><a href="index.html">Back to home page</a></p>
+        <div id="instruc1">
+            <ul>
+                <li>Click to generate more particles.<br>When the particles die, they have a chance of generating more particles where they died. </li>
+                <li>This chance is based on how many particles are alive at that moment.</li>
+                <li>Use the slider (at the bottom of the window) to raise and lower the carrying capacity.</li>
+                <li>The size of the particle is relative to how much life it has left and the population size is displayed by the number on the top left.</li>
+            </ul>
+        
+    	</div>
+        <iframe id="sim1" src="https://editor.p5js.org/EliLevy/embed/tD09-C8mk" width="400" height="430"></iframe>
+    	
+    </body>
+</html>
