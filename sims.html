@@ -10,71 +10,46 @@
             body {
                 text-align: center;
             }
-
-            #sim1 {
-                position: absolute;
-                top: 200px;
-                left: 100px;
-            }
-
-            #instruc1 {
-                position: absolute;
-                font-size: 20px;
-                width: 500px;
-                top: 200px;
-                left: 500px;
-            }
-            
-             #sim2 {
-                position: absolute;
-                top: 700px;
-                left: 100px;
-                margin: 60px;
-            }
-
-             #instructions2 {
-                font-weight: bold;
-                position: absolute;
-                top: 760px;
-                right: 250px;
-            }
-
-
             ul  {
                 text-align: left;
                 list-style: none;
+                font-size: 20px;
             }
-            
-            #sim3 {
-                position: absolute;
-                top: 1300px;
-                left: 150px;
-                margin: 50px;
+
+            #sim2 {
+                text-align: right;
             }
         </style>
     </head>
     <body>
     	<h3 id = "proc-sims" >JavaScript Simulations</h3>
         <p><a href="index.html">Back to home page</a></p>
-        <div id="instruc1">
+        
+        
+        <div style="width:400px;float:left;margin-left:50px; margin-bottom: 50px;"><iframe id="sim1" src="https://editor.p5js.org/EliLevy/embed/tD09-C8mk" width="400" height="430"></iframe></div>
+        <div style="width:450px;float:left;margin-left: 10px">
             <ul>
-                <li>Click to generate more particles.<br>When the particles die, they have a chance of generating more particles where they died. </li>
-                <li>This chance is based on how many particles are alive at that moment.</li>
-                <li>Use the slider (at the bottom of the window) to raise and lower the carrying capacity.</li>
-                <li>The size of the particle is relative to how much life it has left and the population size is displayed by the number on the top left.</li>
+                <li>Click to generate more particles.</li>
+                <li>When the particles die, they have a chance</li>
+                <li>of generating more particles where they died. </li>
+                <li>This chance is based on how many particles</li>
+                <li>are alive at that moment.</li>
+                <li>Use the slider (at the bottom of the window)</li> 
+                <li>to raise and lower the carrying capacity.</li>
+                <li>The size of the particle is relative to how much </li>
+                <li>life it has left and the population size is displayed</li>
+                <li> by the number on the top left.</li>
             </ul>
-        
-    	</div>
-        <iframe id="sim1" src="https://editor.p5js.org/EliLevy/embed/tD09-C8mk" width="400" height="430"></iframe>
-        
-        <iframe class="programs" id="sim2" src="https://editor.p5js.org/EliLevy/embed/b4L3sM9w7" width="1000" height="500"></iframe>
-        <div id="instructions2">
-            <p>Click to add more streamers</p>
-            <p>or press the z key for a color explosion</p>
-            <p>press backspace to reset</p>
         </div>
+        
+                    
+        <div style="width:100%;max-width:1000px;margin-left:auto;margin-right:auto;margin-bottom: 50px;"><iframe class="programs"  src="https://editor.p5js.org/EliLevy/embed/b4L3sM9w7" width="1000" height="500"></iframe></iframe></div>
+                
+        
 
-        <iframe id="sim3" src="https://editor.p5js.org/EliLevy/embed/GdoPIBq_z" width="1000" height="1100"></iframe>
-    	
+        <div style="width:1000px; margin-left: auto;margin-right: auto;margin-bottom: 50px;"><iframe id="sim3" src="https://editor.p5js.org/EliLevy/embed/GdoPIBq_z" width="1000" height="720"></iframe></div>   
+        
+
+
     </body>
 </html>
