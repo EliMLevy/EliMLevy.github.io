@@ -34,7 +34,7 @@ class Bullet {
       }
     } else {
       if(p5.Vector.dist(this.location,p.location) < 25) {
-        p.health -= (1 + level); 
+        p.health -= (1 + level)*armor; 
       }
     }
 
