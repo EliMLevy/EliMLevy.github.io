@@ -63,18 +63,18 @@ function setup() {
 
   z = new Zombies();
   
-  getGist();
+  //getGist();
 
 
 }
 
 function draw() {
-  if(gotten[gotten.length-1] === undefined) {
-    getGist();
-  } else {
-    globalHighScore = parseData(gotten[gotten.length-1]);
-    //console.log(globalHighScore);
-  }
+  // if(gotten[gotten.length-1] === undefined) {
+  //   getGist();
+  // } else {
+  //   globalHighScore = parseData(gotten[gotten.length-1]);
+  //   //console.log(globalHighScore);
+  // }
   if (playMenu === true) {
     menu();
   } else if (playGame === true) {
@@ -244,17 +244,17 @@ function game() {
     if (level > farthestLevel) {
       farthestLevel = level;
       //console.log(displayLeaderboard());
-      if(farthestLevel > globalHighScore) {
-        if(farthestLevel < 10) {
-          updateGist("00" + farthestLevel);
-        } else if(farthestLevel < 100) {
-          updateGist("0" + farthestLevel);
-        } else {
-          updateGist(farthestLevel);
-        }
+      // if(farthestLevel > globalHighScore) {
+      //   if(farthestLevel < 10) {
+      //     updateGist("00" + farthestLevel);
+      //   } else if(farthestLevel < 100) {
+      //     updateGist("0" + farthestLevel);
+      //   } else {
+      //     updateGist(farthestLevel);
+      //   }
         
-        console.log("new highscore");
-      }
+      //   console.log("new highscore");
+      // }
     }
     reset();
     playGame = false;
@@ -655,13 +655,9 @@ function getGist() {
 
   fetch("https://api.github.com/gists/d684f34381f7c5712f52ece08ff116b2", requestOptions)
     .then(response => (response.text()))
-    // .then(fucntion(result) {
-    //     answer = result;
-    //       })
     .then(function(result) {
       saveData(result);
     })
-    //result => console.log(result))
     .catch(error => console.log('error', error));
 
 }
