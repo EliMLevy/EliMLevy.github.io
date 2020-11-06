@@ -44,6 +44,15 @@ let accuracy = 1.0; //decreases
 
 let canvas;
 
+let highestScore;
+
+let gotten = [];
+
+let refresh;
+
+let globalHighScore;
+
+
 function setup() {
   canvas = createCanvas(700, 500);
   canvas.position(windowWidth/2-width/2,100);
@@ -54,11 +63,18 @@ function setup() {
 
   z = new Zombies();
   
+  getGist();
 
 
 }
 
 function draw() {
+  if(gotten[gotten.length-1] === undefined) {
+    getGist();
+  } else {
+    globalHighScore = parseData(gotten[gotten.length-1]);
+    //console.log(globalHighScore);
+  }
   if (playMenu === true) {
     menu();
   } else if (playGame === true) {
@@ -220,13 +236,25 @@ function game() {
   z.run(p.location.x, p.location.y);
 
 
-
+  
 
   if (!p.isDead()) {
     p.run();
   } else {
     if (level > farthestLevel) {
       farthestLevel = level;
+      //console.log(displayLeaderboard());
+      if(farthestLevel > globalHighScore) {
+        if(farthestLevel < 10) {
+          updateGist("00" + farthestLevel);
+        } else if(farthestLevel < 100) {
+          updateGist("0" + farthestLevel);
+        } else {
+          updateGist(farthestLevel);
+        }
+        
+        console.log("new highscore");
+      }
     }
     reset();
     playGame = false;
@@ -596,4 +624,91 @@ function mouseReleased() {
       playShop = true;
     }
   }
+}
+
+
+
+
+
+function displayLeaderboard() {
+  if(gotten[gotten.length - 1] != undefined) {
+    highestScore = parseData(gotten[gotten.length - 1]);
+  }
+  return highestScore;
+}
+
+function getGist() {
+  console.log("getting");
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Basic RWxpTUxldnk6OTA3ODY0MGZiM2E2YTZjN2VkNmM0MzI1NTBkMWMwZWQzZDJhNjc3OA==");
+  myHeaders.append("Content-Type", "text/plain");
+
+  var raw = "test";
+
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    //body: raw,
+    redirect: 'follow'
+  };
+
+
+  fetch("https://api.github.com/gists/d684f34381f7c5712f52ece08ff116b2", requestOptions)
+    .then(response => (response.text()))
+    // .then(fucntion(result) {
+    //     answer = result;
+    //       })
+    .then(function(result) {
+      saveData(result);
+    })
+    //result => console.log(result))
+    .catch(error => console.log('error', error));
+
+}
+
+function saveData(args) {
+  let data = args;
+  gotten.push(data);
+  return data;
+}
+
+function parseData(data) {
+  for (let i = 0; i < data.length; i++) {
+    if (data.charAt(i) === 'c' && data.charAt(i + 1) === 'o' && data.charAt(i + 2) === 'n' && data.charAt(i + 8) === ':') {
+      score = data.charAt(i + 11) + data.charAt(i + 12) + data.charAt(i + 13) + data.charAt(i + 14);
+      //console.log(data.charAt(i + 11) + data.charAt(i + 12) + data.charAt(i + 13) + data.charAt(i + 14));
+      return score;
+
+    }
+
+  }
+  
+}
+
+function updateGist(message) {
+  var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic RWxpTUxldnk6OTA3ODY0MGZiM2E2YTZjN2VkNmM0MzI1NTBkMWMwZWQzZDJhNjc3OA==");
+myHeaders.append("Content-Type", "text/plain");
+
+var raw = "{\
+\n  \"description\": \"Hello World Examples\",\
+\n  \"files\": {\
+\n    \"leaderboard.txt\": {\
+\n      \"content\": \" " + message +" \",\
+\n      \"filename\": \"leaderboard.txt\"\
+\n    }\
+\n  }\
+\n}";
+
+var requestOptions = {
+  method: 'PATCH',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://api.github.com/gists/d684f34381f7c5712f52ece08ff116b2", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
 }
