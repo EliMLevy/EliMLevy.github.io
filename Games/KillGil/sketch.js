@@ -17,6 +17,7 @@ let z;
 
 let playMenu = true;
 let playGame = false;
+let playNewHighScore = false;
 let playDeath = false;
 let playTut = false;
 let playShop = false;
@@ -46,11 +47,15 @@ let canvas;
 
 let highestScore;
 
-let gotten = [];
+let got = [];
+let name;
+let submit;
+let allowSubmission = false;
 
 let refresh;
 
 let globalHighScore;
+
 
 
 function setup() {
@@ -63,22 +68,24 @@ function setup() {
 
   z = new Zombies();
   
-  //getGist();
+  name = createInput("name");
+  submit = createButton("submit");
+  getGist();
 
 
 }
 
 function draw() {
-  // if(gotten[gotten.length-1] === undefined) {
-  //   getGist();
-  // } else {
-  //   globalHighScore = parseData(gotten[gotten.length-1]);
-  //   //console.log(globalHighScore);
-  // }
+  if(allowSubmission === true) {
+    submit.mousePressed(submitScore);
+    playNewHighScore = true;
+  }
   if (playMenu === true) {
     menu();
   } else if (playGame === true) {
     game();
+  } else if (playNewHighScore) {
+    newHighScore();
   } else if (playDeath === true) {
     death();
   } else if (nextLevel === true) {
@@ -240,21 +247,14 @@ function game() {
 
   if (!p.isDead()) {
     p.run();
-  } else {
+  } else { 
     if (level > farthestLevel) {
       farthestLevel = level;
-      //console.log(displayLeaderboard());
-      // if(farthestLevel > globalHighScore) {
-      //   if(farthestLevel < 10) {
-      //     updateGist("00" + farthestLevel);
-      //   } else if(farthestLevel < 100) {
-      //     updateGist("0" + farthestLevel);
-      //   } else {
-      //     updateGist(farthestLevel);
-      //   }
-        
-      //   console.log("new highscore");
-      // }
+      if(compareScores() > 0) {
+        console.log("Scores compared");
+        allowSubmission = true;
+      }
+
     }
     reset();
     playGame = false;
@@ -567,6 +567,15 @@ function mouseReleased() {
     }
   }
 
+  if(playNewHighScore) {
+    if(b5.show()){
+      allowSubmission = false;
+      playNewHighScore = false;
+      playDeath = false;
+      playMenu = true;
+    }
+  }
+
   if (playShop === true) {
     if (wallet > 50 || unlimitedMoney === true) {
 
@@ -627,18 +636,33 @@ function mouseReleased() {
 }
 
 
+function newHighScore() {
+  background(136, 255, 0);
+  fill(0);
+  textSize(50);
+  text("You eanred a spot on the",70,60); 
+  text("leaderboard!!!!!",160,110);
+  textSize(30);
+  text("Type your name in the box on the left",90,170);
+  text("and press submit",200,210);
+  textSize(20);
+  text("make sure to refresh the leaderboard to see your name",110,250);
+  text("(it may take a few seconds)", 190,280);
 
+  b5 = new Button(255,330,150,75);
+  b5.setColorScheme(0, 247, 255,0, 153, 255);
+  b5.setCornerCurve(10);
+  b5.setThickness(3);
+  b5.show();
 
-
-function displayLeaderboard() {
-  if(gotten[gotten.length - 1] != undefined) {
-    highestScore = parseData(gotten[gotten.length - 1]);
-  }
-  return highestScore;
+  textSize(40);
+  fill(0);
+  text("MENU",350-80,330+45);
 }
 
+
+
 function getGist() {
-  console.log("getting");
   var myHeaders = new Headers();
   myHeaders.append("Authorization", "Basic RWxpTUxldnk6OTA3ODY0MGZiM2E2YTZjN2VkNmM0MzI1NTBkMWMwZWQzZDJhNjc3OA==");
   myHeaders.append("Content-Type", "text/plain");
@@ -648,63 +672,90 @@ function getGist() {
   var requestOptions = {
     method: 'GET',
     headers: myHeaders,
-    //body: raw,
     redirect: 'follow'
   };
 
 
-  fetch("https://api.github.com/gists/d684f34381f7c5712f52ece08ff116b2", requestOptions)
+  fetch("https://api.github.com/gists/916578271816287196e81463182512bc", requestOptions)
     .then(response => (response.text()))
     .then(function(result) {
-      saveData(result);
+      let JO = JSON.parse(result);
+      console.log(JO["files"]["leaderboard.txt"]["content"].split("|"));
+      for (let i = 0; i < JO["files"]["leaderboard.txt"]["content"].split("|").length; i++) {
+        got[i] = JO["files"]["leaderboard.txt"]["content"].split("|")[i];
+      }
     })
+    //result => console.log(result))
     .catch(error => console.log('error', error));
-
 }
 
-function saveData(args) {
-  let data = args;
-  gotten.push(data);
-  return data;
-}
-
-function parseData(data) {
-  for (let i = 0; i < data.length; i++) {
-    if (data.charAt(i) === 'c' && data.charAt(i + 1) === 'o' && data.charAt(i + 2) === 'n' && data.charAt(i + 8) === ':') {
-      score = data.charAt(i + 11) + data.charAt(i + 12) + data.charAt(i + 13) + data.charAt(i + 14);
-      //console.log(data.charAt(i + 11) + data.charAt(i + 12) + data.charAt(i + 13) + data.charAt(i + 14));
-      return score;
-
+function submitScore() {
+  let updated = "";
+  let newScoreIndex = compareScores();
+  if (newScoreIndex > 0) {
+    for (let i = 0; i < newScoreIndex - 1; i++) {
+      updated += (got[i] + "|");
     }
+    updated += (name.value() + "|" + farthestLevel + "|");
+    for (let i = newScoreIndex; i <= 8; i++) {
+      updated += (got[i - 1] + "|");
+    }
+  } else {
+    for (let i = 0; i < got.length; i++) {
+      updated += (got[i] + "|");
+    }
+  }
+  if(allowSubmission) {
+    console.log(updated);
+    updateGist(updated);
 
   }
-  
+  //console.log(updated);
+  allowSubmission = false;
+  playNewHighScore = false;
+  playDeath = false;
+  playMenu = true;
 }
+
+function compareScores() {
+  for (let i = 1; i < got.length; i += 2) {
+    if (got[i] < farthestLevel) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 
 function updateGist(message) {
   var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic RWxpTUxldnk6OTA3ODY0MGZiM2E2YTZjN2VkNmM0MzI1NTBkMWMwZWQzZDJhNjc3OA==");
-myHeaders.append("Content-Type", "text/plain");
+  myHeaders.append("Authorization", "Basic RWxpTUxldnk6OTA3ODY0MGZiM2E2YTZjN2VkNmM0MzI1NTBkMWMwZWQzZDJhNjc3OA==");
+  myHeaders.append("Content-Type", "text/plain");
 
-var raw = "{\
+  var raw = "{\
 \n  \"description\": \"Hello World Examples\",\
 \n  \"files\": {\
 \n    \"leaderboard.txt\": {\
-\n      \"content\": \" " + message +" \",\
+\n      \"content\": \"" + message + " \",\
 \n      \"filename\": \"leaderboard.txt\"\
 \n    }\
 \n  }\
 \n}";
 
-var requestOptions = {
-  method: 'PATCH',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
+  var requestOptions = {
+    method: 'PATCH',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
 
-fetch("https://api.github.com/gists/d684f34381f7c5712f52ece08ff116b2", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+  fetch("https://api.github.com/gists/916578271816287196e81463182512bc", requestOptions)
+    .then(response => response.text())
+    .then(function(result) {
+      getGist();
+      console.log("done here");
+    })
+    //result => (result))
+    .catch(error => console.log('error', error));
+  
 }

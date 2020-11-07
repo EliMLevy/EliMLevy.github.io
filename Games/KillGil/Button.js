@@ -14,6 +14,7 @@ class Button {
   show() {
     this.touching = false;
     strokeWeight(this.thickness);
+    rectMode(CORNER);
     fill(this.col[0],this.col[1],this.col[2]);
     if(this.height != null) {
       if(mouseX > this.pos.x && mouseY > this.pos.y && mouseX < this.pos.x + this.len && mouseY < this.pos.y + this.height) {
