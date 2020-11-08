@@ -2,6 +2,7 @@
 Change log:
 1.2.0 added shooter, runner, and giant zombies.
 1.2.1 made runners less deadly
+1.2.3 dynamic costs
 
 */
 
@@ -35,13 +36,21 @@ let bu1, b2, b3, b4, b5, b6, b7, b8, b9;
 
 //shop
 let armor = 1.0; //decreases
+let armorCost = 50;
 let speed = 1.0; //increases
+let speedCost = 50;
 let damage = 1.0; //increases
+let damageCost = 50;
 let reloadSpeed = 1.0; //decreases
+let reloadCost = 50;
 let clipSize = 1.0; //increases
+let clipCost = 50;
 let recoilMult = 1.0; //decreases
+let recoilCost = 50;
 let BPS = 1.0; //increases
+let BPSCost = 50;
 let accuracy = 1.0; //decreases
+let accuracyCost = 50;
 
 let canvas;
 
@@ -215,7 +224,7 @@ function menu() {
   
   fill(0);
   textSize(15);
-  text("Version 1.2.1",10,height-10);
+  text("Version 1.2.3",10,height-10);
 }
 
 function game() {
@@ -495,13 +504,13 @@ function shop() {
   fill(0);
   textSize(20);
   text("+10% Armor", 15, 200);
-  text("Cost 50 coins", 25, 230);
+  text("Cost "+ armorCost + " coins", 25, 230);
 
   b8 = new Button(15, 255, 190, 60);
   b8.show();
   fill(0);
   text("+10% Speed", 15, 280);
-  text("Cost 50 coins", 25, 310);
+  text("Cost "+ speedCost + " coins", 25, 310);
 
   //weapon upgrades
   fill(79, 255, 123, 100);
@@ -516,39 +525,39 @@ function shop() {
   fill(0);
   textSize(20);
   text("+10% Damage", 280, 195);
-  text("Cost 50 coins", 290, 225);
+  text("Cost "+ damageCost + " coins", 290, 225);
 
   b2 = new Button(275, 255, 190, 60);
   b2.show();
   fill(0);
   text("-10% Reload speed", 280, 275);
-  text("Cost 50 coins", 290, 305);
+  text("Cost "+ reloadCost + " coins", 290, 305);
 
   b3 = new Button(275, 335, 190, 60);
   b3.show();
   fill(0);
   textSize(20);
   text("+10% Clip Size", 280, 355);
-  text("Cost 50 coins", 290, 385);
+  text("Cost "+ clipCost + " coins", 290, 385);
 
   b4 = new Button(475, 175, 190, 60);
   b4.show();
   fill(0);
   textSize(20);
   text("-10% Recoil", 480, 195);
-  text("Cost 50 coins", 490, 225);
+  text("Cost "+ recoilCost + " coins", 490, 225);
 
   b5 = new Button(475, 255, 190, 60);
   b5.show();
   fill(0);
   text("+10% Bullet/sec", 480, 275);
-  text("Cost 50 coins", 490, 305);
+  text("Cost "+ BPSCost + " coins", 490, 305);
 
   b6 = new Button(475, 335, 190, 60);
   b6.show();
   fill(0);
   text("+10% Accuracy", 480, 355);
-  text("Cost 50 coins", 490, 385);
+  text("Cost "+ accuracyCost + " coins", 490, 385);
 
 }
 
@@ -595,39 +604,61 @@ function mouseReleased() {
       //   let BPS = 1.0; //increases
       //   let accuracy = 1.0; //increases
       // }
-
-      if (bu1.show()) {
-        damage += 0.1;
-        wallet -= 50;
+      if(wallet > damageCost) {
+        if (bu1.show()) {
+          damage += 0.1;
+          wallet -= damageCost;
+          damageCost =floor(damageCost * 1.1);
+        }
       }
-      if (b2.show()) {
-        reloadSpeed *= 0.9;
-        wallet -= 50;
+      if(wallet > reloadCost) {
+        if (b2.show()) {
+          reloadSpeed *= 0.9;
+          wallet -= reloadCost;
+          reloadCost =floor(reloadCost * 1.1);
+        }
       }
-      if (b3.show()) {
-        clipSize += 0.1;
-        wallet -= 50;
+      if(wallet > clipCost) {
+        if (b3.show()) {
+          clipSize += 0.1;
+          wallet -= clipCost;
+          clipCost = floor(clipCost * 1.1);
+        }
       }
-      if (b4.show()) {
-        recoilMult *= 0.9;
-        wallet -= 50;
+      if(wallet > recoilCost) {
+        if (b4.show()) {
+          recoilMult *= 0.9;
+          wallet -= recoilCost;
+          recoilCost = floor(recoilCost * 1.1);
+        }
       }
-      if (b5.show()) {
-        BPS *= 1.1;
-        wallet -= 50;
+      if(wallet > BPSCost) {
+        if (b5.show()) {
+          BPS *= 1.1;
+          wallet -= BPSCost;
+          BPSCost = floor(BPSCost * 1.1);
+        }
       }
-      if (b6.show()) {
-        accuracy *= 1.1;
-        wallet -= 50;
+      if(wallet > accuracyCost) {
+        if (b6.show()) {
+          accuracy *= 1.1;
+          wallet -= accuracyCost;
+          accuracyCost = floor(accuracyCost * 1.1);
+        }
       }
-      if (b7.show()) {
-        armor *= 0.9;
-        wallet -= 50;
+      if(wallet > armorCost) {
+        if (b7.show()) {
+          armor *= 0.9;
+          wallet -= armorCost;
+          armorCost = floor(armorCost * 1.1);
+        }
       }
-      if (b8.show()) {
-        speed += 1;
-        console.log(speed);
-        wallet -= 50;
+      if(wallet > speedCost) {
+        if (b8.show()) {
+          speed += 1;
+          wallet -= speedCost;
+          speedCost = floor(speedCost * 1.1);
+        }
       }
     }
   }
