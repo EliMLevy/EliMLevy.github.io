@@ -138,6 +138,7 @@ function menu() {
 
   if (b1.show()) {
     if (mouseIsPressed) {
+      getGist();
       playMenu = false;
       playGame = true;
     }
