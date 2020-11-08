@@ -643,7 +643,7 @@ function newHighScore() {
   background(136, 255, 0);
   fill(0);
   textSize(50);
-  text("You eanred a spot on the",70,60); 
+  text("You earned a spot on the",70,60); 
   text("leaderboard!!!!!",160,110);
   textSize(30);
   text("Type your name in the box on the left",90,170);
