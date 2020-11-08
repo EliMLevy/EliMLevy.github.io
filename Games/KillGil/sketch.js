@@ -68,8 +68,11 @@ function setup() {
 
   z = new Zombies();
   
+  createP("When you get a high score you will be");
+  createP("prompted to enter your name here");
   name = createInput("name");
   submit = createButton("submit");
+  
   getGist();
 
 
