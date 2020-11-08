@@ -132,7 +132,7 @@ class MachineGun extends Gun {
     fill(255);
     rect(60, 5, 100, 10);
     fill(0);
-    rect(60, 5, this.clip * 2 / clipSize, 10);
+    rect(60, 5, this.clip * 2 / clipSize / this.maxAmmo * 50, 10);
     if (this.reloadCounter > 0) {
       fill(0, 255, 0);
       rect(60, 5, (100 - this.reloadCounter), 10);

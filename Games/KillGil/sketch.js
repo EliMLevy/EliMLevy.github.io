@@ -463,24 +463,24 @@ function shop() {
   text("Back to", width - 105, 27);
   text("menu", width - 95, 47);
 
-//   b10 = new Button(width - 120, 70, 100, 20);
-//   if (unlimitedMoney === false) {
-//     b10.setColorScheme(255, 255, 255, 255, 0, 0);
-//   } else {
-//     b10.setColorScheme(255, 0, 0, 255, 0, 0);
-//   }
+  // b10 = new Button(width - 120, 70, 100, 20);
+  // if (unlimitedMoney === false) {
+  //   b10.setColorScheme(255, 255, 255, 255, 0, 0);
+  // } else {
+  //   b10.setColorScheme(255, 0, 0, 255, 0, 0);
+  // }
 
-//     b10.show();
+  //   b10.show();
 
-//     if (b10.show()) {
-//       if (mouseIsPressed) {
-//         unlimitedMoney = true;
+  //   if (b10.show()) {
+  //     if (mouseIsPressed) {
+  //       unlimitedMoney = true;
 
-//       }
-//     }
-//     textSize(10);
-//     fill(0);
-//     text("Infinite Money", width - 100, 85);
+  //     }
+  //   }
+  //   textSize(10);
+  //   fill(0);
+  //   text("Infinite Money", width - 100, 85);
 
   //player upgrade
   fill(79, 144, 255, 100);
