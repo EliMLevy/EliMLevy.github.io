@@ -265,16 +265,16 @@ function game() {
     playDeath = true;
   }
 
-  if (keyIsDown(87)) {
+  if (keyIsDown(87) || keyIsDown(UP_ARROW)) {
     p.acceleration.y -= 1;
   }
-  if (keyIsDown(83)) {
+  if (keyIsDown(83) || keyIsDown(DOWN_ARROW)) {
     p.acceleration.y += 1;
   }
-  if (keyIsDown(65)) {
+  if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) {
     p.acceleration.x -= 1;
   }
-  if (keyIsDown(68)) {
+  if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
     p.acceleration.x += 1;
   }
 
@@ -305,6 +305,7 @@ function game() {
     text("Exit here >>>>>>", width - 220, height / 2 + 10);
     if (dist(p.location.x, p.location.y, width - 50, height / 2) < 10) {
       level++;
+      getGist();
       playGame = false;
       levelComplete = false;
       nextLevel = true;
