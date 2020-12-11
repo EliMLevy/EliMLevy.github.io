@@ -1,0 +1,147 @@
+body {
+	font: 15px/1.5 Roboto;
+	margin:0;
+	padding: 0;
+	/*background-color: rgb(204, 249, 255);*/
+	background-color: white;
+}
+
+
+/* Global */
+.container {
+	width: 80%;
+	margin: auto;
+	overflow: hidden;
+}
+
+.container h3 {
+	font-size: 20px;
+}
+.container h2 {
+	font-size: 30px;
+}
+
+/*header*/
+
+header {
+	/*background: rgb(0, 102, 255);*/
+	background-image: url('header-small.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	min-height: 90px;
+	/*border-bottom: rgb(204, 249, 255) 3px solid;*/
+}
+
+header h1 {
+	font-size: 40px;
+	color: black;
+}
+
+/*Nav bar */
+nav {
+
+}
+
+nav a {
+	color: white;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 16px;
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+}
+
+nav li {
+	float: left;
+	display: inline;
+	padding: 4px 20px 4px 20px;
+	background: black;
+	border-right: white 3px solid
+}
+
+.highlight,  .current a {
+	color: rgb(77, 255, 255);
+}
+
+nav a:hover {
+	color: rgb(77, 255, 255);
+}
+
+
+/* Interests */
+
+
+#boxes {
+	margin-top: 20px;
+	padding-bottom: 40px;
+	/*border-bottom: rgb(0, 102, 255) 3px solid;*/
+	/*border-top: rgb(0, 102, 255) 3px solid;*/
+}
+
+#boxes .box {
+	float: left;
+	width: 24%;
+	padding: 10px 30px 10px 30px;
+	text-align: center;
+}
+
+#boxes h2 {
+	width: 20%;
+	padding: 10px 0 0 0;
+}
+
+
+/*About me */
+#about-me {
+	margin-top: 30px;
+}
+
+#about-me img {
+	float: right;
+}
+
+/*footer */
+footer {
+	min-height: 30px;
+	padding: 20px;
+	margin-top: 30px;
+	background: rgb(0, 102, 255);
+}
+
+footer h3 {
+	margin-top: 32px;
+	float: left;
+	margin-right: 10px;
+}
+
+footer p {
+	text-align: center;
+	font-size: 10px;
+}
+
+footer form {
+	float: left;
+	margin-top: 30px;
+}
+
+footer form input[type="email"] {
+	padding: 4px;
+	height: 30px;
+	width: 250px;
+}
+
+footer form button {
+	height: 42px;
+	background: rgb(186,213,255);
+	border: none;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+
+
