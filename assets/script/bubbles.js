@@ -21,6 +21,10 @@ function setup() {
 
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 function draw() {
 	background(255);
 	noStroke();
@@ -66,8 +70,10 @@ function mouseReleased() {
 }
 
 function bubbleRain() {
-	for(let i = 0; i < 30; i++) {
-		rain.push(new Bubble(random(width),50,[random(255),random(255),random(255)],true));
+	if(rain.length < 300) {
+		for(let i = 0; i < 30; i++) {
+			rain.push(new Bubble(random(width),50,[random(255),random(255),random(255)],true));
+		}
 	}
 	// console.log("RAINING!!");
 }

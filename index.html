@@ -1,104 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Eli Levy's Web Page</title>
-        <style type="text/css">
-            h1 {
-                text-align: center;
-            }
-            body {
-                
-            }
+<head>
+	<title>Eliyahu Levy's Portfolio</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Eliyahu Levy">
+	<meta name="description" content="A place to showcase my web devlopement and coding skills and interests">
+	<link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+</head>
+<body>
 
-            nav {
-                width: 100%;
-                height: 50px;
-                background-color: white;
-                text-align: center;
-            }
+	<header>
+		<div class="container">
+			<div id="title">
+				<h1>Eliyahu Levy's Portfolio</h1>
+			</div>
+		</div>
+	</header>
+	<script src="./assets/script/bubbles.js"></script>
+	<nav class="container">
+		<ul>
+			<li class="current"><a href="">Home</a></li>
+			<li><a href="./js-prgms/index.html">P5.JS Programs</a></li>
+			<li><a href="./games/index.html">Games</a></li>
+			<li><a href="./gen-art/index.html">Generative Art</a></li>
+			<li><a href="./animations/index.html">Animations</a></li>
+		</ul>
+	</nav>
 
-            ul {
+	<section class="boxes">
+		<div class="container">
+			<h2>Interests</h2>
+			<div class="box">
+				<h3>Web Design</h3>
+				<img src="./assets/img/design_logo.png" width="200px;">
+			</div>
+			<div class="box">
+				<h3>Interactive Programs</h3>
+				<img src="./assets/img/code_logo_filled.png" width="200px;">
+			</div>
+			<div class="box">
+				<h3>Generative Art</h3>
+				<img src="./assets/img/gen_art_logo.png" width="200px;">
+			</div>
+		</div>
+	</section>
 
-            }
+	<section id="about-me">
+		<div class="container">
+			<h2>About me</h2>
+			<img src="./assets/img/me_photo.jpg" width="200px">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam varius metus sit amet facilisis efficitur. Donec auctor tincidunt nisi, ac varius diam rhoncus vitae. Fusce cursus odio nunc, consectetur fringilla ligula auctor a. Fusce quis urna ullamcorper leo rutrum faucibus. In convallis consequat nibh, et hendrerit dolor sodales vel. Integer lobortis iaculis sapien, eget bibendum diam laoreet ac. Nunc vitae ligula vel nunc tempor iaculis. Duis accumsan, ex nec egestas consectetur, est lacus tempor tortor, eget faucibus purus neque tincidunt risus. Proin nec quam ac tellus mollis auctor. Aenean nec velit ut est aliquam accumsan. Nunc bibendum, risus sed tincidunt ultrices, erat nunc egestas leo, vitae sodales ligula elit quis nunc. Aliquam sodales finibus urna vel ornare. Cras ipsum lorem, semper eu faucibus quis, sagittis rhoncus tortor.</p>
+			<img src="">
+		</div>
+	</section>
 
-            ul li {
-                list-style: none;
-                display: inline-block;
+	<footer>
+		<div class="container">
+			<h3>Subscribe to my newsletter:</h3>
+			<form>
+				<input type="email" placeholder="Enter your email...">
+				<button type="button" class="button1">Subscribe</button>
+			</form>
+		</div>
+		<div>
+			<p>Eliyahu Levy copyright &#169; 2020</p>
+		</div>
+	</footer>
 
-            }
-
-            ul li a {
-                padding: 0 20px;
-                text-decoration: none;
-                border: 1px solid black;
-                background-color: rgb(0, 128, 255);
-                color: white;
-            }
-
-            #programleft {
-                border: none;
-                
-            }
-
-            #programright {
-                border: none;
-                position: absolute;
-                top: 120px;
-                left: 1000px;
-            }
-
-            #intruction {
-                position: absolute;
-                top: 50px;
-            }
-
-            #poem {
-                font-size: 20px;
-                position: absolute;
-                top: 150px;
-                left: 350px;
-            }
-        </style>
-    </head>
-    <body>
-    	<h1>Eliyahu Levy's Portfolio</h1>
-    	<nav>
-            <ul>
-            	<li><a href="index.html">Home</a></li>
-                <li><a href="sims.html">JavaScript simulations</a></li>
-                <li><a href=".\Games\progs.html">Games</a></li>
-                <li><a href="anims.html">Blender animations</a></li>
-            </ul>
-        </nav>
-        
-    	<iframe id="programleft" src="https://editor.p5js.org/EliLevy/embed/zz5JVA-C4" width='300' height="700"></iframe>
-
-        <div id="poem">
-            <h3>Opportunity</h3>
-            <h4>by Edward Rowland Sill </h4>
-            <p>This I beheld, or dreamed it in a dream:— <br>
-There spread a cloud of dust along a plain;<br>
-And underneath the cloud, or in it, raged<br>
-A furious battle, and men yelled, and swords<br>
-Shocked upon swords and shields. A prince's banner<br>
-Wavered, then staggered backward, hemmed by foes.<br>
-A craven hung along the battle's edge,<br>
-And thought, "Had I a sword of keener steel—<br>
-That blue blade that the king's son bears,— but this<br>
-Blunt thing—!" He snapped and flung it from his hand,<br>
-And lowering crept away and left the field.<br>
-Then came the king's son, wounded sore bested,<br>
-And weaponless, and saw the broken sword<br>
-Hilt-buried in the dry and trodden sand,<br>
-And ran and snatched it, and with battle-shout<br>
-Lifted afresh he hewed his enemy down<br>
-And saved a great cause that heroic day.</p>
-        </div>
-
-        <div id="programright">
-            <iframe id="programleft" src="https://editor.p5js.org/EliLevy/embed/zz5JVA-C4" width='300' height="700"></iframe>
-            <p id="intruction">(try clicking the bubbles)</p>
-        </div>
-    </body>
+</body>
 </html>
