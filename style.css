@@ -32,6 +32,21 @@ header {
 	padding-bottom: 20px;
 	min-height: 90px;
 	/*border-bottom: rgb(204, 249, 255) 3px solid;*/
+	animation-name: header-animated;
+	animation-duration: 3s;
+	animation-fill-mode: forwards;
+	position: relative;
+	top:-100px;
+}
+
+@keyframes header-animated {
+	0% {
+		top:-100px;
+	}
+
+	100% {
+		top:0;
+	}
 }
 
 header h1 {
@@ -61,7 +76,21 @@ nav li {
 	display: inline;
 	padding: 4px 20px 4px 20px;
 	background: black;
-	border-right: white 3px solid
+	border-right: white 3px solid;
+	animation-name: nav-bar;
+	animation-duration: 3s;
+	animation-fill-mode: forwards;
+	position: relative;
+	top: -100px;
+}
+
+@keyframes nav-bar{
+	0% {
+		top: -100px;
+	}
+	100%{
+		top: 0;
+	}
 }
 
 .highlight,  .current a {
@@ -95,15 +124,71 @@ nav a:hover {
 	padding: 10px 0 0 0;
 }
 
+#home-boxes {
+	position: relative;
+	left: -1100px;
+	animation-name: interests-slide-in;
+	animation-duration: 4s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+	animation-delay: 2s;
+}
+
+@keyframes interests-slide-in {
+	0% {
+		left: -1100px;
+		width: 90%;
+	}
+
+	100% {
+		left:0;
+		width: 90%;
+	}
+}
+
+#home-boxes .box img{
+	transition-property: all;
+	transition-duration: 2s;
+
+}
+
+#home-boxes .box:hover {
+	
+
+}
+
+#home-boxes .box img:hover {
+	transform: rotateY(180deg);
+	/*width: 300px;*/
+
+}
+
+
+
+
+
 
 /*About me */
 #about-me {
 	margin-top: 30px;
+	animation-name: aboutme;
+	animation-duration: 3s;
+	animation-fill-mode: forwards;
+	animation-delay: 2s;
+	position: relative;
+	right: -1500px;
 }
 
 #about-me img {
 	float: right;
 }
+
+@keyframes aboutme{
+	0%{right: -1500;}
+	100%{right: 0;}
+}
+
+
 
 /*footer */
 footer {
