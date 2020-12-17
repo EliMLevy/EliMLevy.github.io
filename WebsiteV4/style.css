@@ -1,0 +1,200 @@
+.container {
+	position: absolute;
+	top: 10%;
+	left: -800px;
+	width: 40%;
+	height: 80%;
+	background: white;
+	opacity: 70%;
+	border-radius: 0 10% 0 10%;
+	font: 15px/1.5 Arial;
+
+	animation-name: slide-in;
+	animation-duration: 2s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes slide-in {
+	0% {
+		left:-800px;
+	}
+
+	100%{
+		left:5%;
+	}
+}
+
+header{
+	width: 100%;
+	height: 20%;
+
+}
+
+header h1 {
+	/*text-align: center;*/
+
+	margin: 3% 0 0 3%;
+	font-size: 3em;
+	
+}
+
+nav {
+	opacity: 100%;
+	font-size: 2.5em;
+	text-align: center;
+	line-height: 200%;
+	
+}
+
+nav a {
+	text-decoration: none;
+	text-transform: uppercase;
+	color: black;
+	opacity: 100%; 
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+	opacity: 100%;
+	list-style-type: none;
+}
+li {
+	position: absolute;
+	left: 15%;
+}
+
+.animation-element {
+	position: absolute;
+	width: 0;
+	height: 0;
+	background: black;
+	border-radius: 50%;
+	transition: all;
+	transition-duration: 1s;
+	opacity: 100%; 
+}
+
+#one {
+	top: 20%;
+}
+
+#a1 {
+	top:15%;
+	left: 50%;
+
+}
+
+#b1 {
+	top:25%;
+	right: 50%;
+}
+
+#one:hover > #a1{
+	width:50px;
+	height:50px;
+	left: -20%;
+	top: 20%;
+} 
+
+#one:hover > #b1{
+	width:50px;
+	height:50px;
+	top: 20%;
+	right: -20%;
+} 
+
+/********/
+
+#two {
+	top: 40%;
+	/*background: black;*/
+}
+
+#a2 {
+	top:15%;
+	left: 50%;
+
+}
+
+#b2 {
+	top:25%;
+	right: 50%;
+}
+
+#two:hover > #a2{
+	width:50px;
+	height:50px;
+	left: -50%;
+	top: 20%;
+} 
+
+#two:hover > #b2{
+	width:50px;
+	height:50px;
+	top: 20%;
+	right: -50%;
+} 
+
+/********/
+
+#three {
+	top: 60%;
+}
+
+#a3 {
+	top:15%;
+	left: 50%;
+
+}
+
+#b3 {
+	top:25%;
+	right: 50%;
+}
+
+#three:hover > #a3{
+	width:50px;
+	height:50px;
+	left: -30%;
+	top: 20%;
+} 
+
+#three:hover > #b3{
+	width:50px;
+	height:50px;
+	top: 20%;
+	right: -30%;
+} 
+
+
+/********/
+
+#four {
+	top: 80%;
+}
+
+#a4 {
+	top:15%;
+	left: 50%;
+
+}
+
+#b4 {
+	top:25%;
+	right: 50%;
+}
+
+#four:hover > #a4{
+	width:50px;
+	height:50px;
+	left: -20%;
+	top: 20%;
+} 
+
+#four:hover > #b4{
+	width:50px;
+	height:50px;
+	top: 20%;
+	right: -20%;
+} 
