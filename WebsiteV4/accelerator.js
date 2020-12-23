@@ -1,6 +1,10 @@
 let attractors = [];
 let movers = [];
 
+let pMaxSpeed = 19;
+let tailLen = 50;
+let gravPull = 15/100;
+
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.position(0,0);
@@ -16,6 +20,18 @@ function setup() {
   // frameRate(15);
 }
 
+function windowResized() {
+	if(optionsA) {
+		resizeCanvas(windowWidth - 17, windowHeight);
+	} else {
+		resizeCanvas(windowWidth, windowHeight);
+	}
+	for(let i = 0; i < 10; i++) {
+		attractors[i] = createVector(random(width/3,width-100),random(100,height-100));
+		// console.log("woriking");
+	}
+}
+
 function draw() {
   background(0);
 	  let cumForce = createVector(0,0);
@@ -24,14 +40,14 @@ function draw() {
   		let a = attractors[j];
   		let force = p5.Vector.sub(a,movers[i].pos);
     	force.normalize();
-    	force.mult(0.15);
+    	force.mult(gravPull);
     	cumForce.add(force);
     	// ellipse(a.x,a.y,20,20);
   	}
 
 	  movers[i].acc = cumForce;
-	  movers[i].update();
 	  movers[i].show();
+	  movers[i].update();
 
   if(movers.length > 6 && i <= movers.length - 7) {
       	movers[i].life--;
@@ -51,10 +67,10 @@ class Mover {
   constructor(x,y) {
     this.pos = createVector(x,y);
     // this.lastPos = createVector(x,y);
-    this.history = [];
+    this.history = [createVector(x,y)];
     this.vel = createVector(random(-3,3),random(-3,3));
     this.acc = createVector(0,0);
-    this.maxSpeed = 19;
+    this.maxSpeed = pMaxSpeed;
     this.life = 255;
     
   }
@@ -66,11 +82,13 @@ class Mover {
     // noStroke();
     // ellipse(this.pos.x,this.pos.y,3);
     strokeWeight(10);
-    line(this.pos.x,this.pos.y,this.history[this.history.length-1].x,this.history[this.history.length-1].y);
+    if(this.history[this.history.length-1] != undefined) {
+	    line(this.pos.x,this.pos.y,this.history[this.history.length-1].x,this.history[this.history.length-1].y);
+    }
     for(let i = 1; i < this.history.length; i++) {
     	let colB = map(colA,0,255,0,i * 10);
     	stroke(colB);
-    	strokeWeight(i/5)
+    	strokeWeight(map(i/5,0,tailLen/5,0,10));
     	line(this.history[i].x,this.history[i].y,this.history[i-1].x,this.history[i-1].y);
     }
   }
@@ -80,11 +98,13 @@ class Mover {
     let y = this.pos.y;
     this.history.push(createVector(x,y));
     this.vel.add(this.acc);
-    this.vel.limit(this.maxSpeed);
+    this.vel.limit(pMaxSpeed);
     this.pos.add(this.vel);
-    if(this.history.length > 50) {
-    	this.history.splice(0,1);
+    if(this.history.length > tailLen) {
+    	this.history.splice(0,3);
     }
     // console.log(this.pos.x,this.lastPos.x);
   }
 }
+
+
