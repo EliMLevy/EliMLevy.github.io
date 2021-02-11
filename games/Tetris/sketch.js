@@ -19,6 +19,10 @@ let score;
 let speed;
 let levelElement;
 
+let gamePlaying = true;
+
+let restart;
+
 function setup() {
 
     let canvas = createCanvas(300,600);
@@ -38,10 +42,8 @@ function setup() {
         board[20][i] = 1;
     }
 
-    console.log(board);
-
-    current = new Block(0);
-    next = new Block(1);
+    current = new BlockZero();
+    next = new BlockOne();
 
     // frameRate(50);
 
@@ -78,6 +80,12 @@ function setup() {
     items.appendChild(score);
     items.appendChild(speed);
     items.appendChild(levelElement);
+
+    restart = createButton('Restart');
+    restart.mousePressed(reset);
+    restart.size(100,50);
+    restart.style('font-size','1.5em');
+    // restart.setAttribute('style', 'font-size:1.2em');
 }
 
 function draw() {
@@ -93,9 +101,11 @@ function draw() {
     }
 
     current.display();
-    if(timer <= 0 || (keyIsPressed && keyCode == DOWN_ARROW)) {
-        current.moveDown();
-        timer = maxTime;
+    if(gamePlaying) {
+        if(timer <= 0 || (keyIsPressed && keyCode == DOWN_ARROW)) {
+            current.moveDown();
+            timer = maxTime;
+        }
     }
 
     oldBlocks.forEach(row => {
@@ -112,19 +122,30 @@ function draw() {
 function newBlock() {
     current = next;
     // document.getElementById("nextBlock").textContent = "Next Block: " + current.blockType;
-    next = new Block(floor(random(6)));
     let number = 'zero';
-    if(next.blockType == 1) {
+    let rand = random(1);
+    if(rand < 1/7) {
+        next = new BlockZero();
+    } else if(rand < 2/7) {
+        next = new BlockOne();
         number = "one";
-    } else if(next.blockType == 2) {
+    } else if(rand < 3/7) {
+        next = new BlockTwo();
         number = "two";
-    } else if(next.blockType == 3) {
+    }else if(rand < 4/7) {
+        next = new BlockThree();
         number = "three";
-    } else if(next.blockType == 4) {
+    }else if(rand < 5/7) {
+        next = new BlockFour();
         number = "four";
-    } else if(next.blockType == 5) {
+    }else if(rand < 6/7) {
+        next = new BlockFive();
         number = "five";
-    } 
+    } else {
+        next = new BlockSix();
+        number = "six";
+    }
+
     document.getElementById("blockPic").setAttribute('src','./block-'+ number +'.png');
 }
 
@@ -136,8 +157,9 @@ function checkRows() {
         }
     }
     if(lost) {
-        console.log("YOU LOSE");
-        noLoop();
+        // console.log("YOU LOSE");
+        // noLoop();
+        gamePlaying = false;
     }
     for(let i = 0; i < 20; i++) {
         let completed = true;
@@ -180,24 +202,26 @@ function removeRow(num) {
 }
 
 function keyPressed() {
-    if(keyCode == LEFT_ARROW) {
-        if(current.canMove("LEFT")) {
-            current.move("LEFT");
+    if(gamePlaying) {
+        if(keyCode == LEFT_ARROW) {
+            if(current.canMove("LEFT")) {
+                current.move("LEFT");
+            }
         }
-    }
-    if(keyCode == RIGHT_ARROW) {
-        if(current.canMove("RIGHT")) {
-            current.move("RIGHT");
+        if(keyCode == RIGHT_ARROW) {
+            if(current.canMove("RIGHT")) {
+                current.move("RIGHT");
+            }
         }
-    }
-
-    if(keyCode == UP_ARROW) {
-        if(current.canRotate("UP")) {
-            current.rotateBlock("UP");
+    
+        if(keyCode == UP_ARROW) {
+            if(current.canRotate("UP")) {
+                current.rotateBlock("UP");
+            }
         }
-    }
-    if(key == ' ') {
-        slamBlock();
+        if(key == ' ') {
+            slamBlock();
+        }
     }
 }
 
@@ -206,4 +230,32 @@ function slamBlock() {
 
     }
 
+}
+
+function reset() {
+    for(let i = 0; i < 20; i++) {
+        board[i] = [];
+        oldBlocks[i] = [];
+        for(let j = 0; j < 10; j++) {
+            board[i][j] = 0;
+            oldBlocks[i][j] = undefined;
+        }
+    }
+    board[20] = [];
+    for(let i = 0; i < 10; i++) {
+        board[20][i] = 1;
+    }
+
+    current = new BlockZero();
+    next = new BlockOne();
+
+    playerScore = 0;
+    maxTime = 20;
+    level = 0;
+    score.textContent = "Score: " + playerScore;
+    speed.textContent = "Speed: " + 100 / maxTime;
+    levelElement.textContent = "Level: " + level;
+    blockPic.setAttribute('src','./block-one.png');
+    
+    gamePlaying = true;
 }
