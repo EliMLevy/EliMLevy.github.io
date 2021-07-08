@@ -45,22 +45,22 @@ function setup() {
   let instructions = createP("Click on the correct color before the timer runs out!");
   instructions.style("font-size", "28px");
 
-  database = firebase.firestore();
-  ref = database.collection('score');
+  // database = firebase.firestore();
+  // ref = database.collection('score');
   
-  ref.orderBy('score').onSnapshot(snapshot => {
-  	generateLeaderboard();
-    // let changes = snapshot.docChanges();
-    // changes.reverse().forEach(change => {
-    //   if(change.type == 'added') {
-    //     renderLeaderboard(change.doc);
-    //     leaderboardScores.push(arr[i].data().score);
-    //   } else if(change.type == 'removed') {
-    //     let li = leaderboard.querySelector('[data-id=' + change.doc.id + ']');
-    //     leaderboard.removeChild(li);
-    //   }
-    // })
-  })
+  // ref.orderBy('score').onSnapshot(snapshot => {
+  // 	generateLeaderboard();
+  //   // let changes = snapshot.docChanges();
+  //   // changes.reverse().forEach(change => {
+  //   //   if(change.type == 'added') {
+  //   //     renderLeaderboard(change.doc);
+  //   //     leaderboardScores.push(arr[i].data().score);
+  //   //   } else if(change.type == 'removed') {
+  //   //     let li = leaderboard.querySelector('[data-id=' + change.doc.id + ']');
+  //   //     leaderboard.removeChild(li);
+  //   //   }
+  //   // })
+  // })
 
   
 
