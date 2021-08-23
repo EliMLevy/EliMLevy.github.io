@@ -1,0 +1,71 @@
+body {
+  background-color: rgb(163, 247, 181);
+  overflow: hidden;
+}
+
+.one-two {
+  animation-name: onetwo;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes onetwo {
+  0%   {background-color: rgb(163, 247, 181);}
+  100%  {background-color: rgb(131, 201, 244);}
+}
+
+.two-one {
+  animation-name: twoone;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes twoone {
+  0%   {background-color: rgb(131, 201, 244);}
+  100%  {background-color: rgb(163, 247, 181);}
+}
+
+.two-three {
+  animation-name: twothree;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes twothree {
+  0%  {background-color: rgb(131, 201, 244);}
+  100% {background-color: rgb(115, 231, 227);}
+}
+
+.three-two {
+  animation-name: threetwo;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes threetwo {
+  0%  {background-color: rgb(115, 231, 227);}
+  100% {background-color: rgb(131, 201, 244);}
+}
+
+
+.three-four {
+  animation-name: threefour;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes threefour {
+  0%  {background-color: rgb(115, 231, 227);}
+  100% {background-color: blue;}
+}
+
+.four-three {
+  animation-name: fourthree;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fourthree {
+  0%  {background-color: blue;}
+  100% {background-color: rgb(115, 231, 227);}
+}

@@ -1,0 +1,91 @@
+.hidden {
+  display: none;
+}
+
+.show-up {
+  font-size: 30px;
+  position: absolute;
+  width: 50%;
+  animation-name: showup;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes showup {
+  0%   {
+    top: 150%;
+    left: 40%;
+  }
+  100%  {
+    top: 50%;
+    left: 40%;
+    transform: translate(0,-50%);
+  }
+}
+
+.show-down {
+  font-size: 30px;
+  position: absolute;
+  width: 50%;
+  animation-name: showdown;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes showdown {
+  0% {
+    top: 50%;
+    left: 40%;
+    transform: translate(0,-50%) rotateX(90deg);
+  }
+
+  100% {
+    top: 50%;
+    left: 40%;
+    transform: translate(0,-50%) rotateX(0);
+  }
+}
+
+.hide-up {
+  font-size: 30px;
+  position: absolute;
+  width: 50%;
+  animation-name: hideup;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hideup {
+  
+  0% {
+    top: 50%;
+    left: 40%;
+    transform: translate(0,-50%) rotateX(0);
+  }
+  100% {
+    top: 50%;
+    left: 40%;
+    transform: translate(0,-50%) rotateX(90deg);
+  }
+}
+
+.hide-down {
+  font-size: 30px;
+  position: absolute;
+  width: 50%;
+  animation-name: hidedown;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hidedown {
+  0%  {
+    top: 50%;
+    left: 40%;
+    transform: translate(0,-50%);
+  }
+  100%   {
+    top: 150%;
+    left: 40%;
+  }
+}

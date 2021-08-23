@@ -1,0 +1,52 @@
+.square-show {
+  position: absolute;
+  background-color: aliceblue;
+  animation-name: showsquare;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  border: 2px solid black;
+}
+.square-hide {
+  position: absolute;
+  background-color: aliceblue;
+  animation-name: hidesquare;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  border: 2px solid black;
+}
+
+.square1-show {
+  width: 500px;
+  height: 500px;
+  top: -20%;
+} 
+.square2-show {
+  width: 300px;
+  height: 300px;
+  top: 50%;
+} 
+.square3-show {
+  width: 350px;
+  height: 350px;
+  top: 75%;
+} 
+
+@keyframes showsquare {
+  0%   {
+    left: -50%;
+  }
+  100%  {
+    transform:   rotateZ(45deg);
+    left: -10%;
+  }
+}
+
+@keyframes hidesquare {
+  100%   {
+    left: -50%;
+  }
+  0%  {
+    transform:   rotateZ(45deg);
+    left: -10%;
+  }
+}
