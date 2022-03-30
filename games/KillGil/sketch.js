@@ -82,14 +82,14 @@ function setup() {
   name = createInput("name");
   submit = createButton("submit");
   
-  getGist();
+  // getGist();
 
 
 }
 
 function draw() {
   if(allowSubmission === true) {
-    submit.mousePressed(submitScore);
+    // submit.mousePressed(submitScore);
     playNewHighScore = true;
   }
   if (playMenu === true) {
@@ -147,7 +147,7 @@ function menu() {
 
   if (b1.show()) {
     if (mouseIsPressed) {
-      getGist();
+      // getGist();
       playMenu = false;
       playGame = true;
     }
@@ -314,7 +314,7 @@ function game() {
     text("Exit here >>>>>>", width - 220, height / 2 + 10);
     if (dist(p.location.x, p.location.y, width - 50, height / 2) < 10) {
       level++;
-      getGist();
+      // getGist();
       playGame = false;
       levelComplete = false;
       nextLevel = true;
@@ -743,7 +743,7 @@ function submitScore() {
   }
   if(allowSubmission) {
     console.log(updated);
-    updateGist(updated);
+    // updateGist(updated);
 
   }
   //console.log(updated);
@@ -788,7 +788,7 @@ function updateGist(message) {
   fetch("https://api.github.com/gists/916578271816287196e81463182512bc", requestOptions)
     .then(response => response.text())
     .then(function(result) {
-      getGist();
+      // getGist();
       console.log("done here");
     })
     //result => (result))
