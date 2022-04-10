@@ -66,29 +66,39 @@ let refresh;
 let globalHighScore;
 
 
+/* HACKATHON STUFF */
+let medicationAlertY = -100;
+let runningMedicationAlert = false;
+let medicationAlertDesc = false;
+let medicationAlertAsc = false;
+let medicationAlertTimer = 100;
+/* END HACKATHON STUFF */
+
+
 
 function setup() {
   canvas = createCanvas(700, 500);
-  canvas.position(windowWidth/2-width/2,100);
+  canvas.position(windowWidth / 2 - width / 2, 100);
 
   menuP = new Player(width / 2, height / 2);
 
   p = new Player(70, height / 2);
 
   z = new Zombies();
-  
+
   // createP("When you get a high score you will be");
   // createP("prompted to enter your name here");
   // name = createInput("name");
   // submit = createButton("submit");
-  
+
   // getGist();
+
 
 
 }
 
 function draw() {
-  if(allowSubmission === true) {
+  if (allowSubmission === true) {
     // submit.mousePressed(submitScore);
     playNewHighScore = true;
   }
@@ -109,7 +119,35 @@ function draw() {
   } else if (playShop === true) {
     shop();
   }
-  
+
+  /* HACKATHON STUFF */
+  if (runningMedicationAlert) {
+    if (medicationAlertDesc) medicationAlertY+=2;
+    else if(medicationAlertAsc) medicationAlertY-=2;
+
+    if (medicationAlertY > 50) {
+      medicationAlertY = 50;
+      setTimeout(() => {
+        medicationAlertDesc = false;
+        medicationAlertAsc = true;
+
+      }, 1000)
+    }
+
+    if(medicationAlertY < -100) {
+      runningMedicationAlert = false;
+      medicationAlertDesc = false;
+      medicationAlertAsc = false;
+    }
+
+    fill(0, 255, 0);
+    rect(width / 2, medicationAlertY, 200, 50);
+    fill(0);
+    text("You received extra",  370, medicationAlertY + 20)
+    text("coins from Incentivate!",  360, medicationAlertY + 40)
+  }
+  /* END HACKATHON STUFF */
+
 }
 
 function keyPressed() {
@@ -221,10 +259,10 @@ function menu() {
 
     }
   }
-  
+
   fill(0);
   textSize(15);
-  text("Version 1.2.3",10,height-10);
+  text("Version 1.2.3", 10, height - 10);
 }
 
 function game() {
@@ -256,14 +294,14 @@ function game() {
   z.run(p.location.x, p.location.y);
 
 
-  
+
 
   if (!p.isDead()) {
     p.run();
-  } else { 
+  } else {
     if (level > farthestLevel) {
       farthestLevel = level;
-      if(compareScores() > 0) {
+      if (compareScores() > 0) {
         console.log("Scores compared");
         allowSubmission = true;
       }
@@ -430,8 +468,8 @@ function tutorial() {
             if (tutStep > 5) {
               b1 = new Button(width / 2 + 155, height / 2 + 20, 140, 70);
               b1.setCornerCurve(10);
-              b1.setColorScheme(255,255,255,200,200,200);
-              
+              b1.setColorScheme(255, 255, 255, 200, 200, 200);
+
               if (b1.show()) {
                 if (mouseIsPressed) {
                   playTut = false;
@@ -504,13 +542,13 @@ function shop() {
   fill(0);
   textSize(20);
   text("+10% Armor", 15, 200);
-  text("Cost "+ armorCost + " coins", 25, 230);
+  text("Cost " + armorCost + " coins", 25, 230);
 
   b8 = new Button(15, 255, 190, 60);
   b8.show();
   fill(0);
   text("+10% Speed", 15, 280);
-  text("Cost "+ speedCost + " coins", 25, 310);
+  text("Cost " + speedCost + " coins", 25, 310);
 
   //weapon upgrades
   fill(79, 255, 123, 100);
@@ -525,44 +563,44 @@ function shop() {
   fill(0);
   textSize(20);
   text("+10% Damage", 280, 195);
-  text("Cost "+ damageCost + " coins", 290, 225);
+  text("Cost " + damageCost + " coins", 290, 225);
 
   b2 = new Button(275, 255, 190, 60);
   b2.show();
   fill(0);
   text("-10% Reload speed", 280, 275);
-  text("Cost "+ reloadCost + " coins", 290, 305);
+  text("Cost " + reloadCost + " coins", 290, 305);
 
   b3 = new Button(275, 335, 190, 60);
   b3.show();
   fill(0);
   textSize(20);
   text("+10% Clip Size", 280, 355);
-  text("Cost "+ clipCost + " coins", 290, 385);
+  text("Cost " + clipCost + " coins", 290, 385);
 
   b4 = new Button(475, 175, 190, 60);
   b4.show();
   fill(0);
   textSize(20);
   text("-10% Recoil", 480, 195);
-  text("Cost "+ recoilCost + " coins", 490, 225);
+  text("Cost " + recoilCost + " coins", 490, 225);
 
   b5 = new Button(475, 255, 190, 60);
   b5.show();
   fill(0);
   text("+10% Bullet/sec", 480, 275);
-  text("Cost "+ BPSCost + " coins", 490, 305);
+  text("Cost " + BPSCost + " coins", 490, 305);
 
   b6 = new Button(475, 335, 190, 60);
   b6.show();
   fill(0);
   text("+10% Accuracy", 480, 355);
-  text("Cost "+ accuracyCost + " coins", 490, 385);
+  text("Cost " + accuracyCost + " coins", 490, 385);
 
 }
 
 function mouseReleased() {
-  
+
   if (playGame === true) {
     if (p.gun != undefined && p.gun.clip > 0 && p.gun.coolDownCounter > p.gun.coolDown) {
 
@@ -581,8 +619,8 @@ function mouseReleased() {
     }
   }
 
-  if(playNewHighScore) {
-    if(b5.show()){
+  if (playNewHighScore) {
+    if (b5.show()) {
       allowSubmission = false;
       playNewHighScore = false;
       playDeath = false;
@@ -604,56 +642,56 @@ function mouseReleased() {
       //   let BPS = 1.0; //increases
       //   let accuracy = 1.0; //increases
       // }
-      if(wallet > damageCost) {
+      if (wallet > damageCost) {
         if (bu1.show()) {
           damage += 0.1;
           wallet -= damageCost;
-          damageCost =floor(damageCost * 1.1);
+          damageCost = floor(damageCost * 1.1);
         }
       }
-      if(wallet > reloadCost) {
+      if (wallet > reloadCost) {
         if (b2.show()) {
           reloadSpeed *= 0.9;
           wallet -= reloadCost;
-          reloadCost =floor(reloadCost * 1.1);
+          reloadCost = floor(reloadCost * 1.1);
         }
       }
-      if(wallet > clipCost) {
+      if (wallet > clipCost) {
         if (b3.show()) {
           clipSize += 0.1;
           wallet -= clipCost;
           clipCost = floor(clipCost * 1.1);
         }
       }
-      if(wallet > recoilCost) {
+      if (wallet > recoilCost) {
         if (b4.show()) {
           recoilMult *= 0.9;
           wallet -= recoilCost;
           recoilCost = floor(recoilCost * 1.1);
         }
       }
-      if(wallet > BPSCost) {
+      if (wallet > BPSCost) {
         if (b5.show()) {
           BPS *= 1.1;
           wallet -= BPSCost;
           BPSCost = floor(BPSCost * 1.1);
         }
       }
-      if(wallet > accuracyCost) {
+      if (wallet > accuracyCost) {
         if (b6.show()) {
           accuracy *= 1.1;
           wallet -= accuracyCost;
           accuracyCost = floor(accuracyCost * 1.1);
         }
       }
-      if(wallet > armorCost) {
+      if (wallet > armorCost) {
         if (b7.show()) {
           armor *= 0.9;
           wallet -= armorCost;
           armorCost = floor(armorCost * 1.1);
         }
       }
-      if(wallet > speedCost) {
+      if (wallet > speedCost) {
         if (b8.show()) {
           speed += 1;
           wallet -= speedCost;
@@ -662,8 +700,8 @@ function mouseReleased() {
       }
     }
   }
-  
-  if(playMenu) {
+
+  if (playMenu) {
     if (b3.show()) {
       playMenu = false;
       playShop = true;
@@ -676,24 +714,24 @@ function newHighScore() {
   background(136, 255, 0);
   fill(0);
   textSize(50);
-  text("You earned a spot on the",70,60); 
-  text("leaderboard!!!!!",160,110);
+  text("You earned a spot on the", 70, 60);
+  text("leaderboard!!!!!", 160, 110);
   textSize(30);
-  text("Type your name in the box on the left",90,170);
-  text("and press submit",200,210);
+  text("Type your name in the box on the left", 90, 170);
+  text("and press submit", 200, 210);
   textSize(20);
-  text("make sure to refresh the leaderboard to see your name",110,250);
-  text("(it may take a few seconds)", 190,280);
+  text("make sure to refresh the leaderboard to see your name", 110, 250);
+  text("(it may take a few seconds)", 190, 280);
 
-  b5 = new Button(255,330,150,75);
-  b5.setColorScheme(0, 247, 255,0, 153, 255);
+  b5 = new Button(255, 330, 150, 75);
+  b5.setColorScheme(0, 247, 255, 0, 153, 255);
   b5.setCornerCurve(10);
   b5.setThickness(3);
   b5.show();
 
   textSize(40);
   fill(0);
-  text("MENU",350-80,330+45);
+  text("MENU", 350 - 80, 330 + 45);
 }
 
 
@@ -714,7 +752,7 @@ function getGist() {
 
   fetch("https://api.github.com/gists/916578271816287196e81463182512bc", requestOptions)
     .then(response => (response.text()))
-    .then(function(result) {
+    .then(function (result) {
       let JO = JSON.parse(result);
       console.log(JO["files"]["leaderboard.txt"]["content"].split("|"));
       for (let i = 0; i < JO["files"]["leaderboard.txt"]["content"].split("|").length; i++) {
@@ -741,7 +779,7 @@ function submitScore() {
       updated += (got[i] + "|");
     }
   }
-  if(allowSubmission) {
+  if (allowSubmission) {
     console.log(updated);
     // updateGist(updated);
 
@@ -787,11 +825,61 @@ function updateGist(message) {
 
   fetch("https://api.github.com/gists/916578271816287196e81463182512bc", requestOptions)
     .then(response => response.text())
-    .then(function(result) {
+    .then(function (result) {
       // getGist();
       console.log("done here");
     })
     //result => (result))
     .catch(error => console.log('error', error));
+
+}
+
+function handleIncentivatePoints(points) {
+  runningMedicationAlert = true;
+  medicationAlertDesc = true;
+  wallet += points * 10;
+}
+
+startIncentivate(handleIncentivatePoints)
+
+
+
+
+
+function startIncentivate(handler) {
+
+  window.setInterval(() => {
+    // poll server
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
   
+    var raw = JSON.stringify({
+      "username": "Eliyahu"
+    });
+  
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+  
+    fetch("http://localhost:8000/game_poll", requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+        if(result["points"] > 0) {
+          // runningMedicationAlert = true;
+          // medicationAlertDesc = true;
+          // wallet += result["points"] * 10;
+          handler(result["points"])
+        }
+      })
+      .catch(error => console.log('error', error));
+  
+    // if there are points waiting add them to wallet and do animation
+    console.log("Running")
+  
+  
+  }, 1000);
 }
